@@ -1,0 +1,16 @@
+.u-show--sp{
+  display: block;
+
+  @include breakpoint(pc){
+    display: none;
+  }
+}
+
+.u-show--pc{
+  display: none;
+
+  @include breakpoint(pc){
+    display: block;
+  }
+}
+

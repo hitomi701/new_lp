@@ -1,0 +1,12 @@
+.l-wrap{
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  @include breakpoint(pc){
+    min-width: 1400px;
+    margin: 0 auto;
+  }
+
+}
+

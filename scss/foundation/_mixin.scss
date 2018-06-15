@@ -1,0 +1,80 @@
+@mixin breakpoint($point) {
+  @if $point == tab {
+    @media (min-width:640px) { @content ; }
+  }
+  @if $point == tab_wide {
+    @media (min-width:768px) { @content ; }
+  }
+  @if $point == pc {
+    @media (min-width:1024px) { @content ; }
+  }
+  @if $point == pc_wide {
+    @media (min-width:1280px) { @content ; }
+  }
+}
+
+@mixin cfx{
+  &:after{
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+@mixin fontsize($num){
+  font-size: ($num / 16)+rem;
+}
+
+
+@mixin clearfix{
+    &:before,&:after { content: ""; display: table;}
+    &:after {clear: both;}
+    zoom: 1;
+}
+
+// カラム設定用Mixin
+@mixin col(
+    $column-count,
+    $column-margin  : margin(),
+    $selector       : '.item',
+    $is-list        : false,
+    $is-flex        : true
+) {
+
+    // リストに適用する場合
+    @if $is-list == true {
+        $selector : '> li';
+    }
+
+    // is Flex (default)
+    @if $is-flex == true {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        $margin-size : #{$column-margin * ($column-count - 1)};
+
+        #{$selector} {
+            width: calc((100% - #{$margin-size}) / #{$column-count});
+            @content;
+        }
+    } // end Flex
+
+    // not Flex
+    @else {
+        @include clearfix;
+        margin-left : #{-$column-margin};
+        $margin-size : #{$column-margin * $column-count};
+
+        #{$selector} {
+            float: left;
+            margin-right: -.1px;    // 小数点以下の切り捨て・切り上げ解釈違いに対応
+            margin-left:#{$column-margin};
+            width: calc((100% - #{$margin-size}) / #{$column-count});
+            @content;
+        }
+    } // end if not Flex
+}
+
+// 書き方
+// @include col(カラム数,margin値,'セレクタ');

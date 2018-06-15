@@ -1,0 +1,8 @@
+.l-footer{
+  border-top: 1px solid #ccc;
+  padding: 20px 0 20px;
+
+  @include breakpoint(pc) {
+    position: relative;
+  }
+}

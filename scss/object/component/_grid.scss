@@ -1,0 +1,12 @@
+.c-grid {
+  &-4{
+    background-color: $color--blue;
+        color: #6BC9FF;
+    @include breakpoint(tab) {
+      @include col(2,15px,'.item') ;
+    }
+    @include breakpoint(pc) {
+      @include col(4,15px,'.item') ;
+  }
+  }
+}
